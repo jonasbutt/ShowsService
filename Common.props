@@ -1,0 +1,10 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Authors>Jonas Butt</Authors>
+    <Company>The Code Architect</Company>
+    <Product>Shows Service</Product>
+  </PropertyGroup>
+
+</Project>
