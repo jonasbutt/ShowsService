@@ -8,8 +8,8 @@
 7. In the Package Manager Console, run `Add-Migration Initial`
 8. In the Package Manager Console, run `Update-Database`
 9. Hit F5
-10. The ingestion process will be kicked off and start retrieving the required data from the TvMaze API (this will take some time)
-11. The Shows API will be available immediatly using the data available from the ingestion process
+10. The ingestion process will be kicked off and start retrieving the required data from the TVmaze API (this will take some time)
+11. The Shows API will be usable immediately using the data available from the ingestion process
 
 ### Improvement Ideas
 * Instead of environment variables and hardcoded constants, create proper settings and secrets using standard ASP.NET Core mechanism  
