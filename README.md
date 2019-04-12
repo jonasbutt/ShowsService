@@ -16,6 +16,6 @@
 * Instead of public access, configure proper authentication for the Hangfire dashboard  
 * Create more unit tests  
 * Create integration tests using `TestServer` and `WebApplicationFactory`  
-* Reduce Hangfire latency by swichting to Redis  
+* Reduce Hangfire latency by switching to Redis  
 * In `ShowIngestionBackgroundService`, find a better way to determine the ingestion process has been kicked off  
 * Wrap the static Hangfire `BackgroundJob` class in an interface to improve testability 
