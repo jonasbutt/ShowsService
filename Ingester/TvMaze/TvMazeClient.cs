@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using ShowsService.Tools.Serialization;
@@ -19,9 +18,6 @@ namespace ShowsService.Ingester.TvMaze
 
     public class TvMazeClient : ITvMazeClient
     {
-        private static readonly Uri TvMazeUri = new Uri("https://api.tvmaze.com");
-        private const string UserAgent = "TheCodeArchitect";
-
         private readonly HttpClient httpClient;
         private readonly IJsonSerializer jsonSerializer;
 
@@ -30,8 +26,6 @@ namespace ShowsService.Ingester.TvMaze
             IJsonSerializer jsonSerializer)
         {
             this.httpClient = httpClient;
-            this.httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue(UserAgent)));
-            this.httpClient.BaseAddress = TvMazeUri;
             this.jsonSerializer = jsonSerializer;
         }
 

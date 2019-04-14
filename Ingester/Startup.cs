@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http.Headers;
 using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Builder;
@@ -54,7 +55,11 @@ namespace ShowsService.Ingester
             });
             services.AddHangfireServer();
 
-            services.AddHttpClient<ITvMazeClient, TvMazeClient>()
+            services.AddHttpClient<ITvMazeClient, TvMazeClient>(httpClient =>
+                     {
+                         httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("TheCodeArchitect")));
+                         httpClient.BaseAddress = new Uri("https://api.tvmaze.com");
+                     })
                     .AddPolicyHandler(_ =>
                          HttpPolicyExtensions.HandleTransientHttpError()
                                              .OrResult(response => response.StatusCode == HttpStatusCode.TooManyRequests)
