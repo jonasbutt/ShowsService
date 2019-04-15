@@ -39,7 +39,7 @@ namespace ShowsService.Ingester.Jobs
         public async Task<ICollection<ShowCastMember>> GetCast(long showId, CancellationToken cancellationToken)
         {
             var tvMazePersons = await this.tvMazeClient.GetCast(showId, cancellationToken);
-            return tvMazePersons?.GroupBy(x => x.Id) // Fix for data issue: show 3 has duplicate entry for cast member 6078, so we remove duplicate cast members
+            return tvMazePersons?.GroupBy(x => x.Id)
                                  .Select(x => x.First())
                                  .Select(x => new ShowCastMember
                                   {
