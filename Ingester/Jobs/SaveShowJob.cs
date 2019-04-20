@@ -8,7 +8,6 @@ namespace ShowsService.Ingester.Jobs
     public interface ISaveShowJob
     {
         [JobDisplayName("SAVE SHOW: {0}")]
-        [DisableConcurrentExecution(120)]
         Task Run(Show show, IJobCancellationToken jobCancellationToken);
     }
 

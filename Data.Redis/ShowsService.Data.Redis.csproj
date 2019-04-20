@@ -6,6 +6,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+    <PackageReference Include="StackExchange.Redis.Extensions.AspNetCore" Version="5.0.1" />
+    <PackageReference Include="StackExchange.Redis.Extensions.Core" Version="5.0.1" />
+    <PackageReference Include="StackExchange.Redis.Extensions.Newtonsoft" Version="5.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\ShowsService.Data.csproj" />

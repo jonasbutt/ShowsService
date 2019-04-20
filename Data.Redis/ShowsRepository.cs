@@ -1,21 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using ShowsService.Data.Model;
+using StackExchange.Redis.Extensions.Core.Abstractions;
 
 namespace ShowsService.Data.Redis
 {
     public class ShowsRepository : IShowsRepository
     {
-        public Task<IEnumerable<Show>> GetShows(int pageNumber, short pageSize, CancellationToken cancellationToken)
+        private const string ShowsKey = "shows";
+
+        private readonly IRedisCacheClient redisCacheClient;
+
+        public ShowsRepository(IRedisCacheClient redisCacheClient)
         {
-            throw new NotImplementedException();
+            this.redisCacheClient = redisCacheClient;
         }
 
-        public Task SaveShow(Show show, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Show>> GetShows(int pageNumber, short pageSize, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await this.redisCacheClient
+                             .GetDbFromConfiguration()
+                             .SortedSetRangeByScoreAsync<Show>(
+                                  ShowsKey, 
+                                  skip: (pageNumber - 1) * pageSize, 
+                                  take: pageSize);
+        }
+
+        public async Task SaveShow(Show show, CancellationToken cancellationToken)
+        {
+            await this.redisCacheClient
+                      .GetDbFromConfiguration()
+                      .SortedSetAddAsync(
+                           ShowsKey,
+                           show,
+                           show.Id);
         }
     }
 }
