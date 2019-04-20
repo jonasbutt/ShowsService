@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http.Headers;
-using Hangfire;
-using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -36,25 +34,7 @@ namespace ShowsService.Ingester
             services.AddTransient<IDownloadShowsJob, DownloadShowsJob>();
             services.AddTransient<IDownloadCastJob, DownloadCastJob>();
             services.AddTransient<ISaveShowJob, SaveShowJob>();
-
-            var connectionString = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_Hangfire");
-            services.AddHangfire(configuration =>
-            {
-                configuration.UseFilter(new ExtendedJobExpirationTimeoutFilter());
-                configuration.UseSqlServerStorage(
-                    connectionString ?? throw new InvalidOperationException("Connection string not set"),
-                                  new SqlServerStorageOptions
-                                  {
-                                      CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-                                      SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-                                      QueuePollInterval = TimeSpan.FromSeconds(3),
-                                      UseRecommendedIsolationLevel = true,
-                                      UsePageLocksOnDequeue = true,
-                                      DisableGlobalLocks = true
-                                  });
-            });
-            services.AddHangfireServer();
-
+            services.AddHangfire();
             services.AddHttpClient<ITvMazeClient, TvMazeClient>(httpClient =>
                      {
                          httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("TheCodeArchitect")));
@@ -69,15 +49,7 @@ namespace ShowsService.Ingester
         public void Configure(IApplicationBuilder app)
         {
             app.UseMvc();
-            app.UseHangfireDashboard(
-                string.Empty,
-                new DashboardOptions
-                {
-                    AppPath = null,
-                    IsReadOnlyFunc = _ => true,
-                    DisplayStorageConnectionString = false,
-                    Authorization = new[] { new PublicAccessDashboardAuthorizationFilter() }
-                });
+            app.UseHangfireDashboard();
         }
     }
 }
