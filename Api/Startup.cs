@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ShowsService.Data.Sql;
+using ShowsService.Data.Redis;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace ShowsService.Api
@@ -20,7 +20,7 @@ namespace ShowsService.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSwaggerGen(options => { options.SwaggerDoc("v1", new Info {Title = "Shows API", Version = "v1"}); });
-            services.AddSql();
+            services.AddRedis();
         }
 
         public void Configure(IApplicationBuilder app)

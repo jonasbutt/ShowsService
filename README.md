@@ -1,4 +1,4 @@
-### Running Locally
+### Running Locally with SQL Server
 1. Create an empty SQL database named `Hangfire`
 2. Create an empty SQL database named `Shows`
 3. Set environment variable `SQLAZURECONNSTR_Hangfire` with the connection string of the `Hangfire` database 
@@ -10,6 +10,13 @@
 9. Hit F5
 10. The ingestion process will be kicked off and start retrieving the required data from the TVmaze API (this will take some time)
 11. The Shows API will be usable immediately using the data available from the ingestion process
+
+### Running Locally with Redis
+1. Set environment variable `ShowsService_Redis` with the connection string of your Redis server
+2. Open `ShowsService.sln` in Visual Studio
+3. Hit F5
+4. The ingestion process will be kicked off and start retrieving the required data from the TVmaze API (this will take some time)
+5. The Shows API will be usable immediately using the data available from the ingestion process
 
 ### Improvement Ideas
 * Instead of environment variables and hardcoded constants, create proper settings and secrets using standard ASP.NET Core mechanism  
