@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShowsService.Data.Model;
+using ShowsService.Data.Sql.Model;
 
-namespace ShowsService.Data
+namespace ShowsService.Data.Sql
 {
     public class ShowsContext : DbContext
     {

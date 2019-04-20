@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
-using ShowsService.Data;
+using ShowsService.Data.Sql;
 using ShowsService.Ingester.Hangfire;
 using ShowsService.Ingester.Jobs;
 using ShowsService.Ingester.TvMaze;
@@ -30,7 +30,7 @@ namespace ShowsService.Ingester
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddData();
+            services.AddSql();
             services.AddTools();
             services.AddHostedService<ShowIngestionBackgroundService>();
             services.AddTransient<IDownloadShowsJob, DownloadShowsJob>();

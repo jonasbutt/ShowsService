@@ -1,4 +1,4 @@
-﻿namespace ShowsService.Data.Model
+﻿namespace ShowsService.Data.Sql.Model
 {
     public class ShowCastMember
     {

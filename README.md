@@ -4,7 +4,7 @@
 3. Set environment variable `SQLAZURECONNSTR_Hangfire` with the connection string of the `Hangfire` database 
 4. Set environment variable `SQLAZURECONNSTR_Shows` with the connection string of the `Shows` database 
 5. Open `ShowsService.sln` in Visual Studio
-6. In the Package Manager Console of Visual Studio, select the project `ShowsService.Data`
+6. In the Package Manager Console of Visual Studio, select the project `ShowsService.Data.Sql`
 7. In the Package Manager Console, run `Add-Migration Initial`
 8. In the Package Manager Console, run `Update-Database`
 9. Hit F5

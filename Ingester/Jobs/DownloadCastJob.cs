@@ -36,22 +36,18 @@ namespace ShowsService.Ingester.Jobs
                 job => job.Run(show, JobCancellationToken.Null));
         }
 
-        public async Task<ICollection<ShowCastMember>> GetCast(long showId, CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<CastMember>> GetCast(long showId, CancellationToken cancellationToken)
         {
             var tvMazePersons = await this.tvMazeClient.GetCast(showId, cancellationToken);
             return tvMazePersons?.GroupBy(x => x.Id)
                                  .Select(x => x.First())
-                                 .Select(x => new ShowCastMember
-                                  {
-                                      ShowId = showId,
-                                      CastMemberId = x.Id,
-                                      CastMember = new CastMember
+                                 .Select(x =>
+                                      new CastMember
                                       {
                                           Id = x.Id,
                                           Name = x.Name,
                                           Birthday = x.Birthday
-                                      }
-                                  })
+                                      })
                                  .ToList();
         }
     }

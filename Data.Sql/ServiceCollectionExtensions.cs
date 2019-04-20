@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ShowsService.Data
+namespace ShowsService.Data.Sql
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddData(this IServiceCollection services)
+        public static void AddSql(this IServiceCollection services)
         {
             var connectionString = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_Shows");
             services.AddTransient<IShowsRepository, ShowsRepository>();

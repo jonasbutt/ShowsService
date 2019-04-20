@@ -43,9 +43,9 @@ namespace ShowsService.Api.Controllers
                 Cast = show.Cast?
                            .Select(x => new CastMember
                             {
-                                Id = x.CastMember.Id,
-                                Name = x.CastMember.Name,
-                                Birthday = x.CastMember.Birthday
+                                Id = x.Id,
+                                Name = x.Name,
+                                Birthday = x.Birthday
                             })
                            .OrderByDescending(x => x.Birthday)
             };
